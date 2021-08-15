@@ -1,0 +1,16 @@
+<div class="p-2">
+  <ng-container *ngIf="!!ingrediente">
+    <div class="row">
+      <div class="col-12 col-md-10 offset-md-1 col-xl-8 offset-xl-2 col-xxl-6 offset-xxl-3">
+        <h2>{{ingrediente.nome}} - ID: {{ingrediente.id}}</h2>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-md-10 offset-md-1 col-xl-8 offset-xl-2 col-xxl-6 offset-xxl-3">
+        <app-bo-ingredienti-form-ingrediente [ingrediente]="ingrediente" (ingredienteModificato)="onGetIngredienteAggiornato($event)"></app-bo-ingredienti-form-ingrediente>
+      </div>
+    </div>
+
+  </ng-container>
+</div>

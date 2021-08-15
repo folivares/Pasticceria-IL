@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>
+  {{dolceVendita.dolce.nome}}
+</h2>
+
+<mat-dialog-content>
+  <p>Ingredienti:</p>
+  <ng-container *ngIf="!!dolceVendita.dolce.ingredientiDolce && dolceVendita.dolce.ingredientiDolce.length > 0 else noingredienti">
+    <ul>
+      <li *ngFor="let ingredienteDolce of dolceVendita.dolce.ingredientiDolce">{{ingredienteDolce.ingrediente.nome}}
+        {{ingredienteDolce.qta}}
+        {{ingredienteDolce.ingrediente.um}}</li>
+    </ul>
+  </ng-container>
+  <ng-template #noingredienti>
+    Nessun ingrediente presente
+  </ng-template>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="onCancel()">Chiudi</button>
+</mat-dialog-actions>

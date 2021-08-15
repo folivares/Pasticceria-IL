@@ -1,0 +1,54 @@
+<ng-container>
+
+    <mat-card>
+        <mat-card-content>
+            <form name="form" [formGroup]="form">
+
+                <!-- nome -->
+                <div class="form-group">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nome</mat-label>
+                        <input matInput formControlName="nome" placeholder="Nome del dolce">
+                    </mat-form-field>
+                </div>
+
+                <!-- ingredienti -->
+                <h4>Ingredienti:</h4>
+
+                <ng-container formArrayName="ingredienti">
+                    <ng-container *ngFor="let ingredienteForm of ingredienti.controls; let i = index">
+                        <div class="ingrediente-form-row" [formGroupName]="i">
+                            <mat-form-field appearance="fill" class="me-2">
+                                <mat-label>Ingrediente</mat-label>
+                                <mat-select formControlName="id" placeholder="Seleziona ingrediente"
+                                    (selectionChange)="onSelectIngrediente($event, i)">
+                                    <mat-option *ngFor="let ingrediente of listaIngredienti" [value]="ingrediente.id">
+                                        {{ingrediente.nome}} ({{ingrediente.um}})
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" class="me-2">
+                                <mat-label>Quantità</mat-label>
+                                <input matInput formControlName="qta" placeholder="qta" type="number">
+                            </mat-form-field>
+                            <button mat-icon-button (click)="deleteIngrediente(i)">
+                                <mat-icon>delete_forever</mat-icon>
+                            </button>
+                        </div>
+                    </ng-container>
+                </ng-container>
+
+                <button mat-mini-fab (click)="addIngrediente()">
+                    <mat-icon class="add-ingrediente-btn">add</mat-icon>
+                </button>
+
+                <div class="form-group mb-0 text-right pt-3">
+                    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="progressBarService.loading | async"> Invia
+                    </button>
+                </div>
+
+            </form>
+        </mat-card-content>
+    </mat-card>
+
+</ng-container>

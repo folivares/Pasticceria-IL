@@ -1,0 +1,61 @@
+<div class="container login-container">
+
+    <div class="row h-100">
+        <div class="col-12 col-md-8 offset-md-2 col-xl-6 offset-xl-3 my-auto">
+            <form [formGroup]="form">
+                <mat-card>
+                    <mat-card-title>Pasticceria IL <mat-icon color="accent">cake</mat-icon>
+                    </mat-card-title>
+                    <mat-card-subtitle>Accesso amministratore</mat-card-subtitle>
+                    <mat-card-content>
+
+                        <mat-form-field class="full-width">
+                            <input id="emailInput" matInput placeholder="Email" formControlName="email"
+                                autocomplete="email" type="email">
+
+                            <mat-error id="invalidEmailError" *ngIf="form.controls['email'].hasError('email')">
+                                Inserisci un indirizzo e-mail valido
+                            </mat-error>
+                            <mat-error id="requiredEmailError" *ngIf="form.controls['email'].hasError('required')">
+                                Email è
+                                <strong>obbligatoria</strong>
+                            </mat-error>
+
+                        </mat-form-field>
+
+                        <mat-form-field class="full-width">
+                            <input id="passwordInput" matInput placeholder="Password" formControlName="password"
+                                type="password" autocomplete="current-password">
+                            <mat-error id="requiredPasswordError" *ngIf="form.controls['email'].hasError('required')">
+                                Password è
+                                <strong>obbligatoria</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+
+                    </mat-card-content>
+
+                    <mat-card-actions class="login-actions" align="end">
+                        <button mat-raised-button id="login" color="primary" [disabled]="form.invalid || loading"
+                            (click)="login()">Accedi</button>
+                    </mat-card-actions>
+
+                </mat-card>
+
+                <div class="col-12 text-center mt-1">
+                    <button mat-button [routerLink]="['/vetrina']">
+                        <span fxShow fxHide.xs>
+                            Ritorna alla vetrina
+                        </span>
+                        <mat-icon>arrow_forward</mat-icon>    
+                    </button>
+                </div>
+
+                <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+            </form>
+        </div>
+        
+    </div>
+
+</div>

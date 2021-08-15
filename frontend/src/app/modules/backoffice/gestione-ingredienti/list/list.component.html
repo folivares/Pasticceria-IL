@@ -1,0 +1,101 @@
+<div class="p-2">
+
+  <div class="row">
+    <div class="col-12">
+
+      <div class="col-12 col-md-10 offset-md-1 col-xl-8 offset-xl-2 mb-3">
+        <h2>Lista ingredienti</h2>
+        <button mat-raised-button color="primary" [routerLink]="['/backoffice/gestione-ingredienti/add']">
+          <span fxShow fxHide.xs>
+            Nuovo
+          </span>
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+      <ng-container *ngIf="ingredienti == []">
+        <div class="row" class="text-center animate">
+          <div class="col-12 col-md-6 offset-md-3">
+            <mat-card>
+              <p>Nessun ingrediente</p>
+              <button mat-raised-button color="primary"
+                [routerLink]="['/backoffice/gestione-ingredienti/add']">Aggiungi</button>
+            </mat-card>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container>
+
+        <div class="row">
+          <div class="col-12 col-md-10 offset-md-1 col-xl-8 offset-xl-2 mb-3">
+            <mat-form-field appearance="standard" class="w-100">
+              <mat-label>Filtra</mat-label>
+              <input matInput (keyup)="filtraTabella($event)" placeholder="Filtra..." #input>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 col-md-10 offset-md-1 col-xl-8 offset-xl-2">
+            <div class="mat-elevation-z8">
+              <!-- tabella ingredienti -->
+              <table mat-table [dataSource]="dataSource" matSort class="w-100">
+
+                <!-- ID -->
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                  <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                </ng-container>
+
+                <!-- nome -->
+                <ng-container matColumnDef="nome">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+                  <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
+                </ng-container>
+
+                <!-- um -->
+                <ng-container matColumnDef="um">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Unità di misura </th>
+                  <td mat-cell *matCellDef="let row"> {{row.um}} </td>
+                </ng-container>
+
+                <!-- azioni -->
+                <ng-container matColumnDef="azioni">
+                  <th mat-header-cell *matHeaderCellDef> Azioni </th>
+                  <td mat-cell *matCellDef="let row">
+                    <!-- modifica -->
+                    <button mat-icon-button color="primary" aria-label="Modifica"
+                      [routerLink]="'/backoffice/gestione-ingredienti/edit/' + row.id"
+                      aria-label="Modifica ingrediente">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <!-- elimina -->
+                    <button mat-icon-button color="warn" aria-label="Elimina" (click)="deleteIngrediente(row)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <!-- nessun dato -->
+                <tr class="mat-row" *matNoDataRow>
+                  <td class="mat-cell" colspan="4">Nessun dato per il filtro "{{input.value}}"</td>
+                </tr>
+              </table>
+
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Seleziona pagina"></mat-paginator>
+            </div>
+          </div>
+        </div>
+
+      </ng-container>
+    </div>
+  </div>
+
+
+
+
+</div>

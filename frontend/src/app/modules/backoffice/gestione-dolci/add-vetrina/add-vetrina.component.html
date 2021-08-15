@@ -1,0 +1,44 @@
+<div class="p-2">
+  <ng-container *ngIf="!!dolce">
+
+    <!-- nome -->
+    <div class="row">
+      <div class="col-12 col-md-10 offset-md-1 col-xl-8 offset-xl-2 col-xxl-6 offset-xxl-3">
+        <h2>{{dolce.nome}} - ID: {{dolce.id}}</h2>
+      </div>
+    </div>
+
+    <!-- gestione presenza vendita -->
+
+    <ng-container *ngIf="!!dolce.dolceVetrina else novetrina">
+      <div class="row">
+        <div class="col-12 col-md-10 offset-md-1 col-xl-8 offset-xl-2 col-xxl-6 offset-xxl-3">
+          <p><span class="fw-bold">"{{dolce.nome}}"</span> è stato messo in vetrina il giorno <span class="fw-bold">{{ dolce.dolceVetrina.data | date:'dd/MM/yyyy' }}</span></p>
+          <p>Modificando i dati sostituirai la vetrina oppure <button mat-raised-button color="warn" (click)="deleteFromVetrina()">
+            <span fxShow fxHide.xs>
+               Rimuovi da vetrina
+            </span>
+            <mat-icon>delete</mat-icon>    
+        </button></p>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #novetrina>
+      <div class="row">
+        <div class="col-12 col-md-10 offset-md-1 col-xl-8 offset-xl-2 col-xxl-6 offset-xxl-3">
+          <p>"{{dolce.nome}}" non è attualmente in vetrina</p>
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- form -->
+    <div class="row">
+      <div class="col-12 col-md-10 offset-md-1 col-xl-8 offset-xl-2 col-xxl-6 offset-xxl-3">
+        <app-bo-dolci-form-vetrina [dolce]="dolce" (formCompilato)="onGetFormCompilato($event)">
+        </app-bo-dolci-form-vetrina>
+      </div>
+    </div>
+
+  </ng-container>
+</div>

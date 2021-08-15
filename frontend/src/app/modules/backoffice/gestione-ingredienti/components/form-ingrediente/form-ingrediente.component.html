@@ -1,0 +1,32 @@
+<ng-container>
+
+    <mat-card>
+        <mat-card-content>
+            <form name="form" [formGroup]="form">
+
+                <!-- nome -->
+                <div class="form-group">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nome</mat-label>
+                        <input matInput formControlName="nome" placeholder="Nome dell'ingrediente">
+                    </mat-form-field>
+                </div>
+
+                <!-- unità di misura -->
+                <div class="form-group">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Unità di misura</mat-label>
+                        <input matInput formControlName="um" placeholder="U.M. dell'ingrediente">
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group mb-0 text-right pt-3">
+                    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="progressBarService.loading | async"> Invia
+                    </button>
+                </div>
+
+            </form>
+        </mat-card-content>
+    </mat-card>
+
+</ng-container>

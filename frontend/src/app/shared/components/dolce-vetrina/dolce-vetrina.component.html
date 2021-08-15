@@ -1,0 +1,53 @@
+<div class="dolce-vetrina-item p-3 mat-elevation-z3 rounded">
+
+    <!-- nome -->
+    <div class="row text-center">
+        <div class="col-12">
+            <h3>{{ dolceVendita.dolce.nome }}</h3>
+        </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- quantità e prezzo -->
+    <div class="row mt-2">
+        <div class="col-12">
+            <table class="table w-100">
+                <tr>
+                    <td class="font-weight-bold">
+                        <span>Q.tà disponibile</span>
+                    </td>
+                    <td class="text-right">
+                        <span>{{ dolceVendita.dolce.dolceVetrina.qta }}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">
+                        <span>Prezzo</span>
+                    </td>
+                    <td class="text-right">
+                        <!-- sconto -->
+                        <ng-container
+                            *ngIf="dolceVendita.prezzoVendita !== dolceVendita.dolce.dolceVetrina.prezzoBase else sconto">
+                            <span class="text-decoration-line-through mr-1">{{ dolceVendita.dolce.dolceVetrina.prezzoBase | currency:'EUR':'symbol-narrow':'1.2-2' }}</span>
+                            <span>{{ dolceVendita.prezzoVendita | currency:'EUR':'symbol-narrow':'1.2-2' }}</span>
+                        </ng-container>
+                        <!-- prezzo base -->
+                        <ng-template #sconto>
+                            <span>{{ dolceVendita.prezzoVendita | currency:'EUR':'symbol-narrow':'1.2-2' }}</span>
+                        </ng-template>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- pulsante info -->
+    <div class="row mt-3">
+        <div class="col-12 text-right">
+            <button mat-flat-button color="accent" (click)="getInfoDolceVetrina()">Info</button>
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,8 @@
+.toolbar-spacer {
+    flex: 1 1 auto;
+  }
+#home-container .mat-icon {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    transform: scale(250%);
+  }
